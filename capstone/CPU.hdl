@@ -1,0 +1,88 @@
+﻿/**
+ * Hack CPU.
+ * Executes A-instructions and C-instructions.
+ */
+
+CHIP CPU {
+    IN inM[16], instruction[16], reset;
+    OUT outM[16], writeM, addressM[15], pc[15];
+
+    PARTS:
+
+    // Identify A-instructions.
+    Not(in=instruction[15], out=isAInstruction);
+
+    // Decode destination bits.
+    And(a=instruction[15], b=instruction[5], out=destA);
+    And(a=instruction[15], b=instruction[4], out=loadD);
+    And(a=instruction[15], b=instruction[3], out=writeM);
+
+    // A register input.
+    Or(a=isAInstruction, b=destA, out=loadA);
+    Mux16(a=instruction, b=aluOut, sel=destA, out=aInput);
+
+    ARegister(
+        in=aInput,
+        load=loadA,
+        out=aRegister,
+        out[0..14]=addressM
+    );
+
+    // ALU input selection.
+    Mux16(
+        a=aRegister,
+        b=inM,
+        sel=instruction[12],
+        out=aluY
+    );
+
+    // ALU.
+    ALU(
+        x=dRegister,
+        y=aluY,
+        zx=instruction[11],
+        nx=instruction[10],
+        zy=instruction[9],
+        ny=instruction[8],
+        f=instruction[7],
+        no=instruction[6],
+        out=aluOut,
+        zr=zr,
+        ng=ng
+    );
+
+    // Drive external output from internal ALU result.
+    Or16(a=aluOut, b=aluOut, out=outM);
+
+    // D register.
+    DRegister(
+        in=aluOut,
+        load=loadD,
+        out=dRegister
+    );
+
+    // Jump condition decoding.
+    Not(in=ng, out=notNegative);
+    Not(in=zr, out=notZero);
+    And(a=notNegative, b=notZero, out=positive);
+
+    And(a=instruction[15], b=instruction[2], out=jumpLTEnabled);
+    And(a=instruction[15], b=instruction[1], out=jumpEQEnabled);
+    And(a=instruction[15], b=instruction[0], out=jumpGTEnabled);
+
+    And(a=jumpLTEnabled, b=ng, out=jumpLT);
+    And(a=jumpEQEnabled, b=zr, out=jumpEQ);
+    And(a=jumpGTEnabled, b=positive, out=jumpGT);
+
+    Or(a=jumpLT, b=jumpEQ, out=jumpLTE);
+    Or(a=jumpLTE, b=jumpGT, out=jump);
+
+    // Program counter.
+    PC(
+        in=aRegister,
+        load=jump,
+        inc=true,
+        reset=reset,
+        out[0..14]=pc
+    );
+}
