@@ -1,4 +1,4 @@
-# Nand2Tetris Capstone â€” Make the Computer Draw a Box
+# Nand2Tetris Capstone "Make the Computer Draw a Box"
 
 **Personal number K:** 51  
 **Box:** 64 pixels wide Ã— 20 rows high, starting at screen row 51.  
@@ -6,16 +6,16 @@
 
 ## Project contents
 
-- `capstone/CPU.hdl` â€” Hack CPU
-- `capstone/Memory.hdl` â€” RAM, Screen and Keyboard memory map
-- `capstone/Computer.hdl` â€” complete Hack computer
-- `capstone/assembler.py` â€” two-pass Python assembler
-- `capstone/Box.asm` â€” personalized keyboard-controlled rectangle
-- `capstone/Box.hack` â€” assembled machine code
-- `capstone/symbols.txt` â€” labels and variables from the assembler
-- `tests/` â€” official test materials and assembler examples
-- `screenshots/` â€” evidence for the report
-- `report/` â€” assignment report
+- `capstone/CPU.hdl`  Hack CPU
+- `capstone/Memory.hdl`  RAM, Screen and Keyboard memory map
+- `capstone/Computer.hdl`  complete Hack computer
+- `capstone/assembler.py`  two-pass Python assembler
+- `capstone/Box.asm`  personalized keyboard-controlled rectangle
+- `capstone/Box.hack`  assembled machine code
+- `capstone/symbols.txt`  labels and variables from the assembler
+- `tests/`  official test materials and assembler examples
+- `screenshots/`  evidence for the report
+- `report/`  assignment report
 
 ## Assemble the box program
 

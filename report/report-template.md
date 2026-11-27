@@ -14,15 +14,15 @@ Implement the Hack computer, write a Python assembler, and draw a keyboard-contr
 - Width: 64 pixels
 - Screen base address: 18016
 
-## 3. Part A â€” Computer architecture
+## 3. Part A  Computer architecture
 Describe CPU.hdl, Memory.hdl and Computer.hdl.
 Insert screenshots of CPU.tst, Memory.tst, ComputerAdd.tst, ComputerMax.tst and ComputerRect.tst.
 
-## 4. Part B â€” Python assembler
+## 4. Part B  Python assembler
 Explain the two-pass process, instruction encoding, labels, variables and symbols.txt.
 Insert assembler test evidence.
 
-## 5. Part C â€” Box program
+## 5. Part C  Box program
 Explain keyboard polling, the 4-word row width, 20-row loop and clearing behavior.
 Insert a screenshot of the running box.
 

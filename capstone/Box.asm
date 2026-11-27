@@ -1,4 +1,4 @@
-// Capstone box program â€” K = 51
+// Capstone box program  K = 51
 // Top row = 51; height = 20 rows; width = 64 pixels (4 words).
 // SCREEN base = 16384 + (51 * 32) = 18016.
 // A pressed key draws black; no key clears the same rectangle.
